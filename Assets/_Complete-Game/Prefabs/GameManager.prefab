@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -44,9 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d59e4dfb9c9404b9471de0c983feac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelStartDelay: 2
-  turnDelay: 0.1
-  playerFoodPoints: 100
+  currentGameMode: {fileID: 11400000, guid: c3bf38c05fe618b48a5d527ce899ce86, type: 2}
   playersTurn: 1
 --- !u!114 &11433658
 MonoBehaviour:
