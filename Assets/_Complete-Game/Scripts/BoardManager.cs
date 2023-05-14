@@ -25,6 +25,10 @@ namespace Completed
 			}
 		}
 		
+		//Question 6
+		//TODO: Almost all of these settings can be moved to a nested scriptable object.
+		//Where each level is a new item in list or a row in a csv file
+		//scriptable objects can be easily updated via backend
 		public LevelData levelData;
 		public int columns = 8; 										//Number of columns in our game board.
 		public int rows = 8;											//Number of rows in our game board.
@@ -91,6 +95,7 @@ namespace Completed
 		
 		
 		//RandomPosition returns a random position from our list gridPositions.
+		//TODO: can be moved to a scriptable object for better scalling based on game design
 		Vector3 RandomPosition ()
 		{
 			//Declare an integer randomIndex, set it's value to a random number between 0 and the count of items in our List gridPositions.
