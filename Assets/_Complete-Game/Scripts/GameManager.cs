@@ -11,6 +11,7 @@ namespace Completed
 	public class GameManager : MonoBehaviour
 	{
 		public GameMode currentGameMode;
+		public GameSettings gameSettings;
 		public static GameManager instance = null;				//Static instance of GameManager which allows it to be accessed by any other script.
 		[HideInInspector] public bool playersTurn = true;		//Boolean to check if it's players turn, hidden in inspector but public.
 		

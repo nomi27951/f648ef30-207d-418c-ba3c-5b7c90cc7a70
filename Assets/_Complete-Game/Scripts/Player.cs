@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;	//Allows us to use UI.
 using UnityEngine.SceneManagement;
-
+using GameDesign;
 namespace Completed
 {
 	//Player inherits from MovingObject, our base class for objects that can move, Enemy also inherits from this.
@@ -20,7 +20,7 @@ namespace Completed
         private Vector2 touchOrigin = -Vector2.one;	//Used to store location of screen touch origin for mobile controls.
 #endif
 		
-		
+		private GameSettings gameSettings;
 		//Start overrides the Start function of MovingObject
 		protected override void Start ()
 		{
@@ -33,6 +33,7 @@ namespace Completed
 			//Set the foodText to reflect the current player food total.
 			foodText.text = "Food: " + food;
 			
+			gameSettings = GameManager.instance.gameSettings;
 			//Call the Start function of the MovingObject base class.
 			base.Start ();
 		}
@@ -181,7 +182,13 @@ namespace Completed
 			else if(other.tag == "Food")
 			{
 				//Add pointsPerFood to the players current food total.
-				food += pointsPerFood;
+				if(food + pointsPerFood > gameSettings.foodCap)
+				{
+					Debug.Log(gameSettings.foodCapExceededMessage);
+					food = gameSettings.foodCap;
+				}
+				else
+					food += pointsPerFood;
 				
 				//Update foodText to represent current total and notify player that they gained points
 				foodText.text = "+" + pointsPerFood + " Food: " + food;

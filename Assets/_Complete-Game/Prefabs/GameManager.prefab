@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameMode: {fileID: 11400000, guid: c3bf38c05fe618b48a5d527ce899ce86, type: 2}
+  gameSettings: {fileID: 11400000, guid: bc43bc0c44917874db3653fc60ceadd1, type: 2}
   playersTurn: 1
 --- !u!114 &11433658
 MonoBehaviour:
