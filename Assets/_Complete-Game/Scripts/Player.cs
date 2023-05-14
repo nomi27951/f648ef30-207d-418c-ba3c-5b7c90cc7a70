@@ -24,7 +24,7 @@ namespace Completed
 
         public delegate void FoodChangeHandler(int newFoodValue);
 
-        public event FoodChangeHandler OnFoodChange;
+        public static event FoodChangeHandler OnFoodChange;
         //Start overrides the Start function of MovingObject
         protected override void Start()
         {

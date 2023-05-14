@@ -27,7 +27,6 @@ namespace Completed
 		private bool enemiesMoving;								//Boolean to check if enemies are moving.
 		private bool doingSetup = true;							//Boolean to check if we're setting up board, prevent Player from moving during setup.
 		
-		public Player player;
 		
 		private HighScoreManager highScoreManager = new HighScoreManager();
 
@@ -58,7 +57,6 @@ namespace Completed
 			
 			// TODO: This should be done by dependency injection ...
 			uimanager = GameObject.FindGameObjectWithTag("UI").GetComponent<UIManager>();
-			player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
 			//Call the InitGame function to initialize the first level 
 			InitGame();
@@ -109,7 +107,7 @@ namespace Completed
 			//Call the SetupScene function of the BoardManager script, pass it current level number.
 			boardScript.SetupScene(level);
 			
-			player.OnFoodChange += uimanager.SetProgressBarValue;
+			Player.OnFoodChange += uimanager.SetProgressBarValue;
         	uimanager.SetProgressBarMaxValue(gameSettings.foodCap);
 
 			Debug.Log(highScoreManager.LoadHighScores());
