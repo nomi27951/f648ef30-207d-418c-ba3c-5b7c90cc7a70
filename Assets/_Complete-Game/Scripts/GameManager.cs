@@ -12,6 +12,9 @@ namespace Completed
 	{
 		public GameMode currentGameMode;
 		public GameSettings gameSettings;
+
+		public int playerFoodPoints = 100;                      //Starting value for Player food points.
+
 		public static GameManager instance = null;				//Static instance of GameManager which allows it to be accessed by any other script.
 		[HideInInspector] public bool playersTurn = true;		//Boolean to check if it's players turn, hidden in inspector but public.
 		
@@ -25,8 +28,10 @@ namespace Completed
 		private bool doingSetup = true;							//Boolean to check if we're setting up board, prevent Player from moving during setup.
 		
 		public Player player;
-    	public ProgressBar progressBar;							//We don't have a UI manager here so just using game manager instead, ideally this should be done by main UI component
 		
+		private HighScoreManager highScoreManager = new HighScoreManager();
+
+		private UIManager uimanager;
 		//Awake is always called before any Start functions
 		void Awake()
 		{
@@ -51,6 +56,10 @@ namespace Completed
 			//Get a component reference to the attached BoardManager script
 			boardScript = GetComponent<BoardManager>();
 			
+			// TODO: This should be done by dependency injection ...
+			uimanager = GameObject.FindGameObjectWithTag("UI").GetComponent<UIManager>();
+			player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
 			//Call the InitGame function to initialize the first level 
 			InitGame();
 		}
@@ -75,6 +84,7 @@ namespace Completed
 		//Initializes the game for each level.
 		void InitGame()
 		{
+			playerFoodPoints = currentGameMode.playerFoodPoints;
 			//While doingSetup is true the player can't move, prevent player from moving while title card is up.
 			doingSetup = true;
 			
@@ -99,8 +109,10 @@ namespace Completed
 			//Call the SetupScene function of the BoardManager script, pass it current level number.
 			boardScript.SetupScene(level);
 			
-			player.OnFoodChange += progressBar.SetValue;
-        	progressBar.SetMaxValue(gameSettings.foodCap);
+			player.OnFoodChange += uimanager.SetProgressBarValue;
+        	uimanager.SetProgressBarMaxValue(gameSettings.foodCap);
+
+			Debug.Log(highScoreManager.LoadHighScores());
 		}
 		
 		
@@ -144,6 +156,7 @@ namespace Completed
 			//Enable black background image gameObject.
 			levelImage.SetActive(true);
 			
+			highScoreManager.SaveHighScore(playerFoodPoints);
 			//Disable this GameManager.
 			enabled = false;
 		}
