@@ -24,7 +24,8 @@ namespace Completed
 		private bool enemiesMoving;								//Boolean to check if enemies are moving.
 		private bool doingSetup = true;							//Boolean to check if we're setting up board, prevent Player from moving during setup.
 		
-		
+		public Player player;
+    	public ProgressBar progressBar;							//We don't have a UI manager here so just using game manager instead, ideally this should be done by main UI component
 		
 		//Awake is always called before any Start functions
 		void Awake()
@@ -98,6 +99,8 @@ namespace Completed
 			//Call the SetupScene function of the BoardManager script, pass it current level number.
 			boardScript.SetupScene(level);
 			
+			player.OnFoodChange += progressBar.SetValue;
+        	progressBar.SetMaxValue(gameSettings.foodCap);
 		}
 		
 		
