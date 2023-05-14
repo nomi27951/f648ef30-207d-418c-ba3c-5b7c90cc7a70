@@ -6,7 +6,7 @@ using Completed;
 
 namespace GameDesign
 {
-    [CreateAssetMenu(fileName = "NewGameMode", menuName = "Tools/GameMode", order = 1)]
+    [CreateAssetMenu(fileName = "GameMode", menuName = "ScriptableObjects/GameMode", order = 1)]
     public class GameMode : ScriptableObject
     {
         public float levelStartDelay = 2f;                      //Time to wait before starting level, in seconds.

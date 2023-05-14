@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic; 		//Allows us to use Lists.
 using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine random number generator.
-
+using GameDesign;
 namespace Completed
 	
 {
@@ -25,7 +25,7 @@ namespace Completed
 			}
 		}
 		
-		
+		public LevelData levelData;
 		public int columns = 8; 										//Number of columns in our game board.
 		public int rows = 8;											//Number of rows in our game board.
 		public Count wallCount = new Count (5, 9);						//Lower and upper limit for our random number of walls per level.
@@ -144,13 +144,13 @@ namespace Completed
 			LayoutObjectAtRandom (foodTiles, foodCount.minimum, foodCount.maximum);
 			
 			//Determine number of enemies based on current level number, based on a logarithmic progression
-			int enemyCount = (int)Mathf.Log(level, 2f);
+			int enemyCount = levelData.GetEnemiesPerLevel(level);
 			
 			//Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
 			LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
 			
 			//Instantiate the exit tile in the upper right hand corner of our game board
-			Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
+			Instantiate (exit, levelData.exitPos, Quaternion.identity);
 		}
 	}
 }
