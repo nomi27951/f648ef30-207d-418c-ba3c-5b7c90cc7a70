@@ -130,6 +130,10 @@ namespace Completed
         {
             //Every time player moves, subtract from food points total.
             food--;
+			if (OnFoodChange != null)
+            {
+                OnFoodChange(food);
+            }
 
             //Update food text display to reflect current score.
             foodText.text = "Food: " + food;
@@ -245,6 +249,10 @@ namespace Completed
 
             //Subtract lost food points from the players total.
             food -= loss;
+			if (OnFoodChange != null)
+            {
+                OnFoodChange(food);
+            }
 
             //Update the food display with the new total.
             foodText.text = "-" + loss + " Food: " + food;

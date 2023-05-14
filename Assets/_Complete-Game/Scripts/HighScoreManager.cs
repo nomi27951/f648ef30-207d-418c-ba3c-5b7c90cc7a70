@@ -38,7 +38,7 @@ public class HighScoreManager
         {
             if (int.TryParse(highScore, out var score))
             {
-                Debug.Log(score);
+                // Debug.Log(score);
                 highScores.Add(score);
             }
         }
